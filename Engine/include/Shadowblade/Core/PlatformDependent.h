@@ -3,6 +3,12 @@
 #if defined(_WIN32)
 	#if defined(_WIN64)
 		#define SB_PLATFORM_WINDOWS
+		
+		#ifdef EXPORT_SYMBOLS
+			#define SB_API __declspec(dllexport)
+		#else
+			#define SB_API __declspec(dllimport)
+		#endif
 	#else
 		#error "32-bit builds are not supported"
 	#endif
