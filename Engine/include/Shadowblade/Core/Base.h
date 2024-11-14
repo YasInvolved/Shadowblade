@@ -1,24 +1,26 @@
 #pragma once
+#include <memory>
 
-#include <Shadowblade/Core/PlatformDependent.h>
-
-#ifdef SB_DEBUG
-	#if defined(SB_PLATFORM_WINDOWS)
-		#define SB_DEBUGBREAK() __debugbreak()
-	#elif defined(SB_PLATFORM_LINUX)
-		#include <signal.h>
-		#define SB_DEBUGBREAK() raise(SIGTRAP)
+#if defined(_WIN32)
+	#ifdef _WIN64
+		#define SB_PLATFORM_WINDOWS
 	#else
-		#error "Platform doesn't support debug breaks"
+		#error "32-bit platforms are not supported at this moment"
 	#endif
-#else
-	#define SB_DEBUGBREAK()
+#elif defined(__APPLE__)
+	#error "Apple platforms are currently not supported. Wait for future releases"
+#elif defined(__ANDROID__)
+	#error "Android is currently not supported. Wait for future releases"
+#elif defined(__LINUX__)
+	#define SB_PLATFORM_LINUX
 #endif
 
-namespace Shadowblade {
-	template <typename T>
-	using Scope = std::unique_ptr<T>;
-
-	template <typename T>
-	using Ref = std::shared_ptr<T>;
-}
+#ifdef SB_PLATFORM_WINDOWS
+	#ifdef SB_EXPORT_SYMBOLS
+		#define SB_API __declspec(dllexport)
+	#else
+		#define SB_API __declspec(dllimport)
+	#endif
+#else
+	#define SB_API
+#endif

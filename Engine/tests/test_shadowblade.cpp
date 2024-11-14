@@ -1,13 +1,14 @@
 #include <gtest/gtest.h>
-#include <shadowblade.hpp>
+#include <Shadowblade/Shadowblade.h>
+#include <iostream>
 
-class TestApplication : public Shadowblade::Application {
-public:
-	TestApplication() {
-		
+class TestApplication : public Shadowblade::BaseApplication {
+protected:
+	void GameLoop() override {
+		std::cout << "Hello Shadowblade\n";
 	}
 };
 
-Shadowblade::Application* Shadowblade::CreateApplication() {
+Shadowblade::BaseApplication* Shadowblade::CreateApplication() {
 	return new TestApplication();
 }
