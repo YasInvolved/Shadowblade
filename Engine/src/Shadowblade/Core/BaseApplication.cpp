@@ -2,11 +2,13 @@
 
 namespace Shadowblade {
 	BaseApplication::BaseApplication() {
-
+		m_appWindow = AppWindow::GetInstance();
 	}
 
 	void BaseApplication::Run() {
-		while (1) {
+		bool exitFlag = false;
+		while (!exitFlag) {
+			m_appWindow->HandleEvents(exitFlag);
 			GameLoop();
 		}
 	}
