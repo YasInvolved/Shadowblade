@@ -11,8 +11,9 @@ namespace Shadowblade {
 
 		void Run();
 	protected:
-		Ref<AppWindow> m_appWindow;
 		virtual void GameLoop() = 0;
+	private:
+		Scope<AppWindow> m_appWindow;
 	};
 
 	BaseApplication* CreateApplication();

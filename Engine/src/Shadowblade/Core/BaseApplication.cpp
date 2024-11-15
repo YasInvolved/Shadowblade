@@ -2,7 +2,7 @@
 
 namespace Shadowblade {
 	BaseApplication::BaseApplication() {
-		m_appWindow = AppWindow::GetInstance();
+		m_appWindow = CreateScope<AppWindow>();
 	}
 
 	void BaseApplication::Run() {

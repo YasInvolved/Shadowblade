@@ -6,14 +6,6 @@ namespace Shadowblade {
 	std::once_flag AppWindow::s_instanceFlag;
 	Ref<AppWindow> AppWindow::s_instance;
 
-	Ref<AppWindow> AppWindow::GetInstance() {
-		std::call_once(s_instanceFlag, [&]() {
-			s_instance = CreateRef<AppWindow>();
-		});
-
-		return s_instance;
-	}
-
 	AppWindow::AppWindow() {
 		m_windowPtr = SDL_CreateWindow("BaseAppWindow", 800, 600, SDL_WINDOW_HIGH_PIXEL_DENSITY);
 		if (m_windowPtr == nullptr) {
